@@ -1,10 +1,10 @@
 package fr.dauphine.javaavance.td3;
 
 public class Cell {
-	String info;
+	Object info;
 	Cell next;
 	
-	public Cell(String s, Cell n) {
+	public Cell(Object s, Cell n) {
 		next = n;
 		info = s;
 	}
@@ -15,7 +15,7 @@ public class Cell {
 		this.next=cell;
 		
 	}
-	public String getValeur() {
+	public Object getValeur() {
 		
 		return this.info;
 	}

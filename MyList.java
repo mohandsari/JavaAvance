@@ -6,7 +6,7 @@ public class MyList {
 	public MyList() {
 		First = new Cell(null,null);
 	}
-	public void add(String s) {
+	public void add(Object s) {
 		First.info =s;
 	}
 
@@ -23,7 +23,7 @@ public class MyList {
 		}
 		return nb;
 	}
-	public void ajouterAuDebut(String s) {
+	public void ajouterAuDebut(Object s) {
 		Cell ancienPremier= First;
 		First= new Cell(s,ancienPremier);
 	}
@@ -49,7 +49,7 @@ public class MyList {
 		return dernier;
 		}
 	
-	public void addLast(String s) {
+	public void addLast(Object s) {
 		if (estVide()) {
 			First= new Cell(s,null);
 		} else {
@@ -62,7 +62,7 @@ public class MyList {
 		}
 		}
 
-	public void ajouterALaFin(String s) {
+	public void ajouterALaFin(Object s) {
 		if (estVide()) {
 			First= new Cell(s,null);
 		} else {
@@ -77,7 +77,7 @@ public class MyList {
 	
 	
 	
-	public void add(String s, int i) {
+	public void add(Object s, int i) {
 		int indice = 0;
 		if (i >= size()) addLast(s); //insertion a la fin
 		if (i == 0) {
@@ -110,7 +110,7 @@ public class MyList {
 
 	}
 	
-	public String get(int i) {
+	public Object get(int i) {
 		int indice = 0;
 		if (i>size()) throw new IllegalArgumentException(i + " is > taille chaine :"+size()) ;
 		else if (i == size()) return getLast().info; 
@@ -127,17 +127,32 @@ public class MyList {
 	public int sumLetters() {
 		int sme =0;
 		Cell ref= getFirst();
+		String str = "";
 		while (ref != null ) {
-			sme= sme+ref.info.length();
+			if(ref.info.getClass().getSimpleName() == "String") {
+				str = (String) ref.info;
+				sme= sme+str.length();
+			}
 			ref=ref.getNext();
 		}
 		return sme;
+	}
+	public boolean contains(Object o) {
+		Cell ref= getFirst();
+		while (ref != null ) {
+			if(ref.info == o) {
+				return true;
+			}
+			else ref=ref.getNext();
+		}
+		return false;
 	}
 	public static void main(String[] args) {
 		 MyList ml = new MyList();
 		 ml.addLast("tatu");
 		 ml.add("toto");
 		 ml.add("titi");
+		 ml.add(45);
 		 ml.addLast("tutu");
 		 System.out.println(ml.toString());
 		 
